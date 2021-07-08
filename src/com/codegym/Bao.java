@@ -2,7 +2,7 @@ package com.codegym;
 
 
 public class Bao extends ThuVien {
-    String ngayPhatHanh;
+    private String ngayPhatHanh;
     public Bao(){}
 
     public Bao(String ngayPhatHanh) {
@@ -24,14 +24,14 @@ public class Bao extends ThuVien {
 
     @Override
     public String toString() {
-        return "Bao{" +
-                ", maTaiLieu='" + maTaiLieu +
-                ", tenTacGia='" + tenTacGia +
-                ", tenTaiLieu='" + tenTaiLieu +
-                ", ngaySanXuat='" + ngaySanXuat +
-                ", soXuatBan='" + soXuatBan +
-                ", giaNhap=" + giaNhap +
-                '}'+'{'+"ngayPhatHanh='" + ngayPhatHanh  +'}';
+        return "Báo [" +
+                ", mã tài liệu='" + maTaiLieu +
+                ", tên tác giả=" + tenTacGia +
+                ", tên tài liệu=" + tenTaiLieu +
+                ", ngày sản xuất=" + ngaySanXuat +
+                ", số xuất bản=" + soXuatBan +
+                ", giá nhập=" + giaNhap +
+                "]-"+"--{"+" ngày phát hành=" + ngayPhatHanh  +" }";
     }
 
 }

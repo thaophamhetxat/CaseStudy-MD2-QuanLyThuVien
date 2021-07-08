@@ -1,11 +1,11 @@
 package com.codegym.gopY;
 
-public class GopY {
+public class HomThu {
     String name;
     String noiDung;
-    public GopY(){}
+    public HomThu(){}
 
-    public GopY(String name, String noiDung) {
+    public HomThu(String name, String noiDung) {
         this.name = name;
         this.noiDung = noiDung;
     }

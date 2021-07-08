@@ -1,8 +1,9 @@
 package com.codegym;
 
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
+
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Scanner;
 
 public class ManagerThuVien {
@@ -105,6 +106,7 @@ public class ManagerThuVien {
                     System.out.println("Không được để trống");
                 }
             }
+            System.out.println(">>>>>>>>>>>>> [ĐÃ LƯU] ");
             return new SachTaiLieu(maTaiLieu, tenTacGia, tenTaiLieu, ngaySanXuat, soXuatBan, giaNhap, tenSach, soTrang);
         }
         if (taiLieu.equals("TapChi")) {
@@ -128,6 +130,7 @@ public class ManagerThuVien {
                     System.out.println("Không được để trống");
                 }
             }
+            System.out.println(">>>>>>>>>>>>> [ĐÃ LƯU] ");
             return new TapChi(maTaiLieu, tenTacGia, tenTaiLieu, ngaySanXuat, soXuatBan, giaNhap, soPhatHanh, thangPhatHanh);
         }
         if (taiLieu.equals("Bao")) {
@@ -141,7 +144,9 @@ public class ManagerThuVien {
                     System.out.println("Không được để trống");
                 }
             }
+            System.out.println(">>>>>>>>>>>>> [ĐÃ LƯU] ");
             return new Bao(maTaiLieu, tenTacGia, tenTaiLieu, ngaySanXuat, soXuatBan, giaNhap, ngayPhatHanh);
+
 
         }
         return null;
@@ -149,18 +154,14 @@ public class ManagerThuVien {
 
     public void editTaiLieu() {
         System.out.println("Nhập mã cần sửa");
-        String maTaiLieu;
-        while (true) {
-            maTaiLieu = scanner.nextLine();
-            if (maTaiLieu.equals("")) {
-                break;
-            } else {
-                System.out.println("can't blank");
-            }
+        String timTL = scanner.nextLine();
+        if (timTL.isEmpty()) {
+            System.out.println("Mã nhập trống! Mời nhập lại");
         }
+        String maTaiLieu;
         int check = -1;
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getMaTaiLieu().equals(maTaiLieu)) {
+            if (list.get(i).getMaTaiLieu().equals(timTL)) {
                 check = i;
             }
         }
@@ -178,7 +179,7 @@ public class ManagerThuVien {
             System.out.println("Fix số xuất bản");
             String soXuatBan = scanner.nextLine();
             System.out.println("Fix giá nhập");
-            Float giaNhap = Float.parseFloat(scanner.nextLine());
+            float giaNhap = Float.parseFloat(scanner.nextLine());
 
             list.get(check).setMaTaiLieu(maTaiLieu);
             list.get(check).setTenTaiLieu(tenTaiLieu);
@@ -190,6 +191,7 @@ public class ManagerThuVien {
                 System.out.println("Fix ngày phát hành");
                 String ngayPhatHanh = scanner.nextLine();
                 ((Bao) list.get(check)).setNgayPhatHanh(ngayPhatHanh);
+                System.out.println(">>>>>>>>>>>>> [ĐÃ SỬA] ");
             }
             if (list.get(check) instanceof SachTaiLieu) {
                 System.out.println("Fix tên sách");
@@ -198,6 +200,7 @@ public class ManagerThuVien {
                 String soTrang = scanner.nextLine();
                 ((SachTaiLieu) list.get(check)).setTenSach(tenSach);
                 ((SachTaiLieu) list.get(check)).setSoTrang(soTrang);
+                System.out.println(">>>>>>>>>>>>> [ĐÃ SỬA] ");
             }
             if (list.get(check) instanceof TapChi) {
                 System.out.println("Fix số phát hành");
@@ -206,6 +209,7 @@ public class ManagerThuVien {
                 String thangPhatHanh = scanner.nextLine();
                 ((TapChi) list.get(check)).setSoPhatHanh(soPhatHanh);
                 ((TapChi) list.get(check)).setThangPhatHanh(thangPhatHanh);
+                System.out.println(">>>>>>>>>>>>> [ĐÃ SỬA] ");
             }
         }
     }
@@ -215,6 +219,7 @@ public class ManagerThuVien {
             System.out.println("Danh sách trống");
         }
         for (ThuVien tv : list) {
+            System.out.println("DANH SÁCH THƯ VIỆN:");
             System.out.println(tv);
         }
     }
@@ -228,6 +233,8 @@ public class ManagerThuVien {
         for (ThuVien tv : list) {
             if (tv.getTenTaiLieu().equals(tenTL)) {
                 System.out.println(tv);
+            } else {
+                System.out.println("Tài liệu không tồn tại");
             }
         }
     }
@@ -238,9 +245,16 @@ public class ManagerThuVien {
         if (tenTL.isEmpty()) {
             System.out.println("Mời nhập tên");
         }
-        for (ThuVien tv : list) {
-            if (tv.getTenTaiLieu().equals(tenTL)) {
-                System.out.println(tv);
+        int check = -1;
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getMaTaiLieu().equals(tenTL)) {
+                check = i;
+            }
+            if (check < 0) {
+                System.out.println("không có trong danh sách");
+            } else {
+                list.remove(check);
+                System.out.println("*****************> ĐÃ XÓA <****************");
             }
         }
     }
@@ -249,10 +263,9 @@ public class ManagerThuVien {
         if (list.isEmpty()) {
             System.out.println("Danh sách trống");
         }
-        Collections.sort(list, sortTaiLieu);
+        list.sort(sortTaiLieu);
+        System.out.println(">>>>>>>>>>>>> [ĐÃ XẮP XẾP] ");
     }
-
-
 
 
     public void writeFile() throws IOException {
@@ -260,7 +273,7 @@ public class ManagerThuVien {
         FileWriter fileWriter = new FileWriter(fileExcel);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
         String tieuDe = "Thuvien" + "," + "maTaiLieu" + "," + "tenTacGia" + "," + "tenTaiLieu" + "," + "ngaySanXuat" + "," + "soXuatBan" + "," +
-                "giaNhap" + "," + "ngayPhatHanh"+ ","+"tenSach" + "," + "soTrang"+","+ "soPhatHanh" + "," + "thangPhatHanh";
+                "giaNhap" + "," + "ngayPhatHanh" + "," + "tenSach" + "," + "soTrang" + "," + "soPhatHanh" + "," + "thangPhatHanh";
         bufferedWriter.write(tieuDe);
         for (ThuVien tv : ManagerThuVien.list) {
             if (tv instanceof Bao) {
@@ -282,7 +295,7 @@ public class ManagerThuVien {
                         + tv.getTenTaiLieu() + ","
                         + tv.getNgaySanXuat() + ","
                         + tv.getSoXuatBan() + ","
-                        + tv.getGiaNhap() + ","+","
+                        + tv.getGiaNhap() + "," + ","
                         + ((SachTaiLieu) tv).getTenSach() + ","
                         + ((SachTaiLieu) tv).getSoTrang());
 
@@ -294,29 +307,31 @@ public class ManagerThuVien {
                         + tv.getTenTaiLieu() + ","
                         + tv.getNgaySanXuat() + ","
                         + tv.getSoXuatBan() + ","
-                        + tv.getGiaNhap() + ","+","+","+","
+                        + tv.getGiaNhap() + "," + "," + "," + ","
                         + ((TapChi) tv).getThangPhatHanh() + ","
                         + ((TapChi) tv).getSoPhatHanh());
             }
         }
         bufferedWriter.close();
+        System.out.println(">>>>>>>>>>>>> ĐÃ GHI <<<<<<<<<<<<");
 
     }
-    public  void readFile() throws IOException{
+
+    public void readFile() throws IOException {
         BufferedReader bufferedReader = null;
         try {
             FileReader fileReader = new FileReader("thuVien.csv");
             bufferedReader = new BufferedReader(fileReader);
-            String line = "";
+            String line;
             while ((line = bufferedReader.readLine()) != null) {
                 String[] str = line.split(", ");
-                for(ThuVien tv:ManagerThuVien.list){
-                    if(tv instanceof Bao){
-                        ManagerThuVien.list.add(new Bao(str[0], str[1], str[2],str[3],str[4],Float.parseFloat(str[5]),str[6]));
-                    }else if(tv instanceof SachTaiLieu){
-                        ManagerThuVien.list.add(new SachTaiLieu(str[0], str[1], str[2],str[3],str[4],Float.parseFloat(str[5]),str[6],str[7]));
-                    }else {
-                        ManagerThuVien.list.add(new TapChi(str[0], str[1], str[2],str[3],str[4],Float.parseFloat(str[5]),str[6],str[7]));
+                for (ThuVien tv : ManagerThuVien.list) {
+                    if (tv instanceof Bao) {
+                        ManagerThuVien.list.add(new Bao(str[0], str[1], str[2], str[3], str[4], Float.parseFloat(str[5]), str[6]));
+                    } else if (tv instanceof SachTaiLieu) {
+                        ManagerThuVien.list.add(new SachTaiLieu(str[0], str[1], str[2], str[3], str[4], Float.parseFloat(str[5]), str[6], str[7]));
+                    } else {
+                        ManagerThuVien.list.add(new TapChi(str[0], str[1], str[2], str[3], str[4], Float.parseFloat(str[5]), str[6], str[7]));
                     }
                 }
             }

@@ -1,10 +1,8 @@
 package com.codegym;
 
-
-
 public class TapChi extends ThuVien {
-    String soPhatHanh;
-    String thangPhatHanh;
+    private String soPhatHanh;
+    private String thangPhatHanh;
 
     public TapChi(){}
 
@@ -37,16 +35,15 @@ public class TapChi extends ThuVien {
 
     @Override
     public String toString() {
-        return "TapChi{" +
-                ", maTaiLieu='" + maTaiLieu + '\'' +
-                ", tenTacGia='" + tenTacGia + '\'' +
-                ", tenTaiLieu='" + tenTaiLieu + '\'' +
-                ", ngaySanXuat='" + ngaySanXuat + '\'' +
-                ", soXuatBan='" + soXuatBan + '\'' +
-                ", giaNhap=" + giaNhap +'}'+'{'+
-                "soPhatHanh='" + soPhatHanh + '\'' +
-                ", thangPhatHanh='" + thangPhatHanh + '\'' +
-                '}';
+        return "Tạp chí [" +
+                ", mã tài liệu=" + maTaiLieu +
+                ", tên tác giả=" + tenTacGia +
+                ", tên tài liệu=" + tenTaiLieu +
+                ", ngày sản xuất=" + ngaySanXuat +
+                ", số xuất bản=" + soXuatBan +
+                ", giá nhập=" + giaNhap +"]-"+"--{"+
+                "số phát hành=" + soPhatHanh +
+                ", tháng phát hành=" + thangPhatHanh + " }";
     }
 
 }

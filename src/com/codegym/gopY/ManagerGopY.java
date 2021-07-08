@@ -1,7 +1,5 @@
 package com.codegym.gopY;
 
-import com.codegym.*;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -10,15 +8,15 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ManagerGopY {
-    static ArrayList<GopY> gopYList = new ArrayList<>();
+    static ArrayList<HomThu> gopYList = new ArrayList<>();
     static Scanner scanner = new Scanner(System.in);
 
     public void themMail(String mail) {
-        GopY gopY = createMail(mail);
-        gopYList.add(gopY);
+        HomThu homThu = createMail(mail);
+        gopYList.add(homThu);
     }
 
-    public GopY createMail(String mail) {
+    public HomThu createMail(String mail) {
         System.out.println("Tên khách hàng: ");
         String name;
         while (true) {
@@ -43,7 +41,7 @@ public class ManagerGopY {
 
     }
     public void show(){
-        for(GopY gy:gopYList){
+        for(HomThu gy:gopYList){
             System.out.println(gy);
         }
     }
@@ -55,12 +53,12 @@ public class ManagerGopY {
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriterMail);
         String tieuDe = "tenKhachHang" + "," + "noiDung";
         bufferedWriter.write(tieuDe);
-        for (GopY gy : gopYList) {
-            if(gy instanceof NguoiDung){
+        for (HomThu homThu : gopYList) {
+            if(homThu instanceof NguoiDung){
                 bufferedWriter.newLine();
                 bufferedWriter.write(
-                        gy.getName() + ","
-                                + gy.getNoiDung());
+                        homThu.getName() + ","
+                                + homThu.getNoiDung());
             }
         }
         bufferedWriter.close();

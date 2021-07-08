@@ -1,8 +1,6 @@
 package com.codegym;
 
-
 import com.codegym.gopY.ManagerGopY;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
@@ -14,9 +12,7 @@ public class MenuThuVien {
     static String nameFile1;
     static String passWord1;
 
-
     public void menu() throws IOException, ClassNotFoundException {
-
         while (true) {
             System.out.println("*=======================================================*");
             System.out.println("|                   QUẢN LÝ THƯ VIỆN                    |");
@@ -110,8 +106,10 @@ public class MenuThuVien {
                             break;
                         }
                         case 4: {
-                            System.out.println("UserName: " + nameFile1);
-                            System.out.println("PassWord: " + passWord1);
+                            System.out.println("*==============================*");
+                            System.out.println("|  UserName: " + nameFile1+   "|");
+                            System.out.println("|  PassWord: " + passWord1+   "|");
+                            System.out.println("*==============================*");
                             break;
                         }
                         case 5: {
@@ -193,7 +191,32 @@ public class MenuThuVien {
                             System.out.println(">>>>>>>>>[Chúng tôi sẽ gửi lại phản hồi cho bạn sau]<<<<<<<<<<");
                             break;
                         } case 2: managerGopY.show();break;
-                        case 3:menu();
+                        case 4:menu();break;
+                        case 3:{
+                            System.out.println("*==========================================*");
+                            System.out.println("|   Bạn đánh giá sản phẩm này như thế nào  |");
+                            System.out.println("*==========================================*");
+                            System.out.println("|     [5].     *****                       |");
+                            System.out.println("|     [4].     ****                        |");
+                            System.out.println("|     [3].     ***                         |");
+                            System.out.println("|     [2].     **                          |");
+                            System.out.println("|     [1].     *                           |");
+                            System.out.println("* =========================================*");
+                            System.out.print("     >>>Chọn: ");
+                            final int selected6 = Integer.parseInt(scanner.nextLine());
+                            switch (selected6){
+                                case 1:
+                                    System.out.println("cảm ơn bạn, tôi xin lỗi về vấn đề bạn gặp phải...");break;
+                                case 2:
+                                    System.out.println("Cảm ơn bạn đã đánh giá");break;
+                                case 3:
+                                    System.out.println("Cảm ơn bạn, chúc bạn sử dụng vui vẻ");break;
+                                case 4:
+                                    System.out.println("cảm ơn bạn!");break;
+                                case 5:
+                                    System.out.println("THANKS YOU!");break;
+                            }
+                        }
                     }
                 }break;
                 default: {
@@ -212,8 +235,6 @@ public class MenuThuVien {
             ManagerUserPerson.listUser.add(new UserPerson("admin", "admin"));
             ManagerUserPerson.writeFileUser();
         }
-
-
         ManagerUserPerson.readFileUser();
         System.out.println("*====================================*");
         System.out.println("|          QUẢN LÝ THƯ VIỆN          |");

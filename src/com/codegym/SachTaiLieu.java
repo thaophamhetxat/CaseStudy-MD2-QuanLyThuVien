@@ -1,8 +1,8 @@
 package com.codegym;
 
 public class SachTaiLieu extends ThuVien {
-    String tenSach;
-    String soTrang;
+    private String tenSach;
+    private String soTrang;
 
     public SachTaiLieu(){}
 
@@ -35,15 +35,15 @@ public class SachTaiLieu extends ThuVien {
 
     @Override
     public String toString() {
-        return "SachTaiLieu{" +
-                ", maTaiLieu='" + maTaiLieu +
-                ", tenTacGia='" + tenTacGia +
-                ", tenTaiLieu='" + tenTaiLieu +
-                ", ngaySanXuat='" + ngaySanXuat +
-                ", soXuatBan='" + soXuatBan +
-                ", giaNhap=" + giaNhap +'}'+'{'+
-                ",tenSach='" + tenSach +
-                ", soTrang='" + soTrang + '}';
+        return "Sách [" +
+                ", mã tài liệu=" + maTaiLieu +
+                ", tên tác giả=" + tenTacGia +
+                ", tên tài liệu=" + tenTaiLieu +
+                ", ngày sản xuất=" + ngaySanXuat +
+                ", số xuất bản=" + soXuatBan +
+                ", giá nhập=" + giaNhap +"]-"+"--{"+
+                ",tên sách=" + tenSach +
+                ", số trang=" + soTrang + "}";
     }
 
 

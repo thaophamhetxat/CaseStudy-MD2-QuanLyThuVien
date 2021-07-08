@@ -1,6 +1,6 @@
 package com.codegym.gopY;
 
-public class NguoiDung extends GopY{
+public class NguoiDung extends HomThu {
     public NguoiDung() {
     }
 
