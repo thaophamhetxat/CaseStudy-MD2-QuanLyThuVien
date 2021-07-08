@@ -1,0 +1,63 @@
+package com.codegym;
+
+
+
+public class TapChi extends ThuVien {
+    String soPhatHanh;
+    String thangPhatHanh;
+
+    public TapChi(){}
+
+    public TapChi(String soPhatHanh, String thangPhatHanh) {
+        this.soPhatHanh = soPhatHanh;
+        this.thangPhatHanh = thangPhatHanh;
+    }
+
+    public TapChi(String maTaiLieu, String tenTacGia, String tenTaiLieu, String ngaySanXuat, String soXuatBan, float giaNhap, String soPhatHanh, String thangPhatHanh) {
+        super(maTaiLieu, tenTacGia, tenTaiLieu, ngaySanXuat, soXuatBan, giaNhap);
+        this.soPhatHanh = soPhatHanh;
+        this.thangPhatHanh = thangPhatHanh;
+    }
+
+    public String getSoPhatHanh() {
+        return soPhatHanh;
+    }
+
+    public void setSoPhatHanh(String soPhatHanh) {
+        this.soPhatHanh = soPhatHanh;
+    }
+
+    public String getThangPhatHanh() {
+        return thangPhatHanh;
+    }
+
+    public void setThangPhatHanh(String thangPhatHanh) {
+        this.thangPhatHanh = thangPhatHanh;
+    }
+
+    @Override
+    public String toString() {
+        return "TapChi{" +
+                "soPhatHanh='" + soPhatHanh + '\'' +
+                ", thangPhatHanh='" + thangPhatHanh + '\'' +
+                ", maTaiLieu='" + maTaiLieu + '\'' +
+                ", tenTacGia='" + tenTacGia + '\'' +
+                ", tenTaiLieu='" + tenTaiLieu + '\'' +
+                ", ngaySanXuat='" + ngaySanXuat + '\'' +
+                ", soXuatBan='" + soXuatBan + '\'' +
+                ", giaNhap=" + giaNhap +
+                '}';
+    }
+    public String ghi() {
+        return maTaiLieu +
+                ", " + tenTacGia +
+                ", " + tenTaiLieu +
+                ", " + ngaySanXuat +
+                ", " + soXuatBan +
+                ", " + giaNhap+
+                ", " + soPhatHanh+
+                ", "+ thangPhatHanh;
+    }
+}
+
+
