@@ -1,6 +1,6 @@
 package com.codegym;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -10,13 +10,13 @@ public class ManagerThuVien {
     public static ArrayList<ThuVien> list = new ArrayList<>();
     static Scanner scanner = new Scanner(System.in);
     static SortTaiLieu sortTaiLieu = new SortTaiLieu();
-    static DocVaGhiTaiLieu docVaGhiTaiLieu = new DocVaGhiTaiLieu();
     private String nameFile;
 
     public ManagerThuVien(String nameFile) {
         this.nameFile = nameFile;
 
     }
+
 
     public void themTaiLieu(String taiLieu) {
         ThuVien thuVien = createTaiLieu(taiLieu);
@@ -211,18 +211,18 @@ public class ManagerThuVien {
     }
 
     public void displayTaiLieu() {
-        if(list.isEmpty()){
+        if (list.isEmpty()) {
             System.out.println("Danh sách trống");
         }
         for (ThuVien tv : list) {
-                System.out.println(tv);
+            System.out.println(tv);
         }
     }
 
     public void searchTaiLieu() {
         System.out.println("Nhập tên tài liệu cần tìm: ");
         String tenTL = scanner.nextLine();
-        if(tenTL.isEmpty()){
+        if (tenTL.isEmpty()) {
             System.out.println("Mời nhập tên");
         }
         for (ThuVien tv : list) {
@@ -235,7 +235,7 @@ public class ManagerThuVien {
     public void deleteTaiLieu() {
         System.out.println("Nhập tên tài liệu cần xóa: ");
         String tenTL = scanner.nextLine();
-        if(tenTL.isEmpty()){
+        if (tenTL.isEmpty()) {
             System.out.println("Mời nhập tên");
         }
         for (ThuVien tv : list) {
@@ -246,17 +246,89 @@ public class ManagerThuVien {
     }
 
     public void sortMaTaiLieu() {
-        if(list.isEmpty()){
+        if (list.isEmpty()) {
             System.out.println("Danh sách trống");
         }
         Collections.sort(list, sortTaiLieu);
     }
 
-    public void ghiFile() throws IOException, ClassNotFoundException {
-        ManagerThuVien.docVaGhiTaiLieu.ghiFile();
+
+
+
+    public void writeFile() throws IOException {
+        File fileExcel = new File("thuVien.csv");
+        FileWriter fileWriter = new FileWriter(fileExcel);
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        String tieuDe = "Thuvien" + "," + "maTaiLieu" + "," + "tenTacGia" + "," + "tenTaiLieu" + "," + "ngaySanXuat" + "," + "soXuatBan" + "," +
+                "giaNhap" + "," + "ngayPhatHanh"+ ","+"tenSach" + "," + "soTrang"+","+ "soPhatHanh" + "," + "thangPhatHanh";
+        bufferedWriter.write(tieuDe);
+        for (ThuVien tv : ManagerThuVien.list) {
+            if (tv instanceof Bao) {
+                bufferedWriter.newLine();
+                bufferedWriter.write("Bao" + ","
+                        + tv.getMaTaiLieu() + ","
+                        + tv.getTenTacGia() + ","
+                        + tv.getTenTaiLieu() + ","
+                        + tv.getNgaySanXuat() + ","
+                        + tv.getSoXuatBan() + ","
+                        + tv.getGiaNhap() + ","
+                        + ((Bao) tv).getNgayPhatHanh());
+
+            } else if (tv instanceof SachTaiLieu) {
+                bufferedWriter.newLine();
+                bufferedWriter.write("SachTaiLieu" + ", "
+                        + tv.getMaTaiLieu() + ","
+                        + tv.getTenTacGia() + ","
+                        + tv.getTenTaiLieu() + ","
+                        + tv.getNgaySanXuat() + ","
+                        + tv.getSoXuatBan() + ","
+                        + tv.getGiaNhap() + ","+","
+                        + ((SachTaiLieu) tv).getTenSach() + ","
+                        + ((SachTaiLieu) tv).getSoTrang());
+
+            } else {
+                bufferedWriter.newLine();
+                bufferedWriter.write("TapChi" + ", "
+                        + tv.getMaTaiLieu() + ","
+                        + tv.getTenTacGia() + ","
+                        + tv.getTenTaiLieu() + ","
+                        + tv.getNgaySanXuat() + ","
+                        + tv.getSoXuatBan() + ","
+                        + tv.getGiaNhap() + ","+","+","+","
+                        + ((TapChi) tv).getThangPhatHanh() + ","
+                        + ((TapChi) tv).getSoPhatHanh());
+            }
+        }
+        bufferedWriter.close();
+
+    }
+    public  void readFile() throws IOException{
+        BufferedReader bufferedReader = null;
+        try {
+            FileReader fileReader = new FileReader("thuVien.csv");
+            bufferedReader = new BufferedReader(fileReader);
+            String line = "";
+            while ((line = bufferedReader.readLine()) != null) {
+                String[] str = line.split(", ");
+                for(ThuVien tv:ManagerThuVien.list){
+                    if(tv instanceof Bao){
+                        ManagerThuVien.list.add(new Bao(str[0], str[1], str[2],str[3],str[4],Float.parseFloat(str[5]),str[6]));
+                    }else if(tv instanceof SachTaiLieu){
+                        ManagerThuVien.list.add(new SachTaiLieu(str[0], str[1], str[2],str[3],str[4],Float.parseFloat(str[5]),str[6],str[7]));
+                    }else {
+                        ManagerThuVien.list.add(new TapChi(str[0], str[1], str[2],str[3],str[4],Float.parseFloat(str[5]),str[6],str[7]));
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            bufferedReader.close();
+        }
+
     }
 
-    public void docFile() throws IOException, ClassNotFoundException {
-        ManagerThuVien.docVaGhiTaiLieu.docFile();
-    }
 }
+
+

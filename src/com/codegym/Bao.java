@@ -25,22 +25,13 @@ public class Bao extends ThuVien {
     @Override
     public String toString() {
         return "Bao{" +
-                "ngayPhatHanh='" + ngayPhatHanh + '\'' +
-                ", maTaiLieu='" + maTaiLieu + '\'' +
-                ", tenTacGia='" + tenTacGia + '\'' +
-                ", tenTaiLieu='" + tenTaiLieu + '\'' +
-                ", ngaySanXuat='" + ngaySanXuat + '\'' +
-                ", soXuatBan='" + soXuatBan + '\'' +
+                ", maTaiLieu='" + maTaiLieu +
+                ", tenTacGia='" + tenTacGia +
+                ", tenTaiLieu='" + tenTaiLieu +
+                ", ngaySanXuat='" + ngaySanXuat +
+                ", soXuatBan='" + soXuatBan +
                 ", giaNhap=" + giaNhap +
-                '}';
+                '}'+'{'+"ngayPhatHanh='" + ngayPhatHanh  +'}';
     }
-    public String ghi() {
-        return maTaiLieu +
-                ", " + tenTacGia +
-                ", " + tenTaiLieu +
-                ", " + ngaySanXuat +
-                ", " + soXuatBan +
-                ", " + giaNhap+
-                ", "+ ngayPhatHanh;
-    }
+
 }

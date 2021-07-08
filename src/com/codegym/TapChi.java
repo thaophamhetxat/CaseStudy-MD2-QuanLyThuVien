@@ -38,26 +38,17 @@ public class TapChi extends ThuVien {
     @Override
     public String toString() {
         return "TapChi{" +
-                "soPhatHanh='" + soPhatHanh + '\'' +
-                ", thangPhatHanh='" + thangPhatHanh + '\'' +
                 ", maTaiLieu='" + maTaiLieu + '\'' +
                 ", tenTacGia='" + tenTacGia + '\'' +
                 ", tenTaiLieu='" + tenTaiLieu + '\'' +
                 ", ngaySanXuat='" + ngaySanXuat + '\'' +
                 ", soXuatBan='" + soXuatBan + '\'' +
-                ", giaNhap=" + giaNhap +
+                ", giaNhap=" + giaNhap +'}'+'{'+
+                "soPhatHanh='" + soPhatHanh + '\'' +
+                ", thangPhatHanh='" + thangPhatHanh + '\'' +
                 '}';
     }
-    public String ghi() {
-        return maTaiLieu +
-                ", " + tenTacGia +
-                ", " + tenTaiLieu +
-                ", " + ngaySanXuat +
-                ", " + soXuatBan +
-                ", " + giaNhap+
-                ", " + soPhatHanh+
-                ", "+ thangPhatHanh;
-    }
+
 }
 
 

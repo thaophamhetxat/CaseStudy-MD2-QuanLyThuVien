@@ -76,19 +76,6 @@ public class ThuVien {
                 ", tenTaiLieu='" + tenTaiLieu + '\'' +
                 ", ngaySanXuat='" + ngaySanXuat + '\'' +
                 ", soXuatBan='" + soXuatBan + '\'' +
-                ", giaNhap=" + giaNhap +
-                '}';
+                ", giaNhap=" + giaNhap + '}';
     }
-
-
-
-    public String ghi() {
-        return maTaiLieu +
-                ", " + tenTacGia +
-                ", " + tenTaiLieu +
-                ", " + ngaySanXuat +
-                ", " + soXuatBan +
-                ", " + giaNhap;
-    }
-
 }

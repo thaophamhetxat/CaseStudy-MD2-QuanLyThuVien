@@ -36,25 +36,15 @@ public class SachTaiLieu extends ThuVien {
     @Override
     public String toString() {
         return "SachTaiLieu{" +
-                "tenSach='" + tenSach + '\'' +
-                ", soTrang='" + soTrang + '\'' +
-                ", maTaiLieu='" + maTaiLieu + '\'' +
-                ", tenTacGia='" + tenTacGia + '\'' +
-                ", tenTaiLieu='" + tenTaiLieu + '\'' +
-                ", ngaySanXuat='" + ngaySanXuat + '\'' +
-                ", soXuatBan='" + soXuatBan + '\'' +
-                ", giaNhap=" + giaNhap +
-                '}';
+                ", maTaiLieu='" + maTaiLieu +
+                ", tenTacGia='" + tenTacGia +
+                ", tenTaiLieu='" + tenTaiLieu +
+                ", ngaySanXuat='" + ngaySanXuat +
+                ", soXuatBan='" + soXuatBan +
+                ", giaNhap=" + giaNhap +'}'+'{'+
+                ",tenSach='" + tenSach +
+                ", soTrang='" + soTrang + '}';
     }
 
-    public String ghi() {
-        return maTaiLieu +
-                ", " + tenTacGia +
-                ", " + tenTaiLieu +
-                ", " + ngaySanXuat +
-                ", " + soXuatBan +
-                ", " + giaNhap+
-                ", " + soTrang+
-                ", "+ tenSach;
-    }
+
 }
