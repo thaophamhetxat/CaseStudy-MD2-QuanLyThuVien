@@ -5,7 +5,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class ManagerUserPerson {
-    static ArrayList<UserPerson> listUser = new ArrayList<>();
+    public static ArrayList<UserPerson> listUser = new ArrayList<>();
 
     public static void writeFileUser() throws IOException {
         FileOutputStream fileOutputStream = new FileOutputStream("user.csv");

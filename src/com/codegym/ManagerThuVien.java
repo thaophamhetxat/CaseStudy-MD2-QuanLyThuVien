@@ -1,10 +1,16 @@
 package com.codegym;
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
+
+import com.codegym.validate.ValidateDay;
+import com.codegym.validate.ValidateDayMonthPH;
+import com.codegym.validate.ValidatePage;
+import com.codegym.validate.ValidateNoiDung;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
 
 public class ManagerThuVien {
 
@@ -12,6 +18,10 @@ public class ManagerThuVien {
     static Scanner scanner = new Scanner(System.in);
     static SortTaiLieu sortTaiLieu = new SortTaiLieu();
     private String nameFile;
+    private static ValidateDay validateDay = new ValidateDay();
+    private static ValidateDayMonthPH validateDayMonthPH = new ValidateDayMonthPH();
+    private static ValidateNoiDung validateNoiDung = new ValidateNoiDung();
+    private static ValidatePage validatePage = new ValidatePage();
 
     public ManagerThuVien(String nameFile) {
         this.nameFile = nameFile;
@@ -28,50 +38,70 @@ public class ManagerThuVien {
         System.out.println("Mã tài liệu: ");
         String maTaiLieu;
         while (true) {
-            try {
-                maTaiLieu = scanner.nextLine();
-                break;
-            } catch (Exception e) {
-                System.out.println("Không được để trống");
+            maTaiLieu = scanner.nextLine();
+            if (!maTaiLieu.isEmpty()) {
+                if (!validateNoiDung.noiDung(maTaiLieu)) {
+                    break;
+                } else {
+                    System.out.println(">>>>[CHÚ Ý]: Mã tài liệu gồm các ký tự từ (a-z/A-Z/0-9) [ví dụ: c04]");
+                }
+            } else {
+                System.out.println("Không được để trống hoặc đã tồn tại");
             }
         }
         System.out.println("Tên tác giả: ");
         String tenTacGia;
         while (true) {
-            try {
-                tenTacGia = scanner.nextLine();
-                break;
-            } catch (Exception e) {
+            tenTacGia = scanner.nextLine();
+            if (!tenTacGia.isEmpty()) {
+                if (!validateNoiDung.noiDung(tenTacGia)) {
+                    break;
+                } else {
+                    System.out.println(">>>>[CHÚ Ý]: Tên tác giả gồm các ký tự từ a-z/A-Z/0-9 [ví dụ: nguyen van a]");
+                }
+            } else {
                 System.out.println("Không được để trống");
             }
         }
         System.out.println("Tên tài liệu: ");
         String tenTaiLieu;
         while (true) {
-            try {
-                tenTaiLieu = scanner.nextLine();
-                break;
-            } catch (Exception e) {
+            tenTaiLieu = scanner.nextLine();
+            if (!tenTaiLieu.isEmpty()) {
+                if (!validateNoiDung.noiDung(tenTaiLieu)) {
+                    break;
+                } else {
+                    System.out.println(">>>>[CHÚ Ý]: Tên tài liệu gồm các ký tự từ a-z/A-Z/0-9 [ví dụ: c04]");
+                }
+            } else {
                 System.out.println("Không được để trống");
             }
         }
-        System.out.println("Ngày sản xuất: ");
+        System.out.println("Ngày sản xuất: (ví dụ: 09/07/2021) ");
         String ngaySanXuat;
         while (true) {
-            try {
-                ngaySanXuat = scanner.nextLine();
-                break;
-            } catch (Exception e) {
+            ngaySanXuat = scanner.nextLine();
+            if (!ngaySanXuat.isEmpty()) {
+                if (validateDay.validate(ngaySanXuat)) {
+                    break;
+                } else {
+                    System.out.println("Sai định dạng ngày! nhập lại");
+                }
+            } else {
                 System.out.println("Không được để trống");
             }
         }
         System.out.println("Số xuất bản: ");
         String soXuatBan;
         while (true) {
-            try {
-                soXuatBan = scanner.nextLine();
-                break;
-            } catch (Exception e) {
+            soXuatBan = scanner.nextLine();
+            if (!soXuatBan.isEmpty()) {
+                if (!validateNoiDung.noiDung(soXuatBan)) {
+                    break;
+                } else {
+                    System.out.println(">>>>[CHÚ Ý]: Số xuất bản gồm các ký tự từ (a-z/A-Z/0-9) [ví dụ: c04]");
+                }
+            } else {
                 System.out.println("Không được để trống");
             }
         }
@@ -89,20 +119,28 @@ public class ManagerThuVien {
             String tenSach;
             System.out.println("Tên sách: ");
             while (true) {
-                try {
-                    tenSach = scanner.nextLine();
-                    break;
-                } catch (Exception e) {
+                tenSach = scanner.nextLine();
+                if (!tenSach.isEmpty()) {
+                    if (!validateNoiDung.noiDung(tenSach)) {
+                        break;
+                    } else {
+                        System.out.println(">>>>[CHÚ Ý]: Tên sách gồm các ký tự từ (a-z/A-Z/0-9) [ví dụ: ngu van]");
+                    }
+                } else {
                     System.out.println("Không được để trống");
                 }
             }
             System.out.println("Số trang: ");
             String soTrang;
             while (true) {
-                try {
-                    soTrang = scanner.nextLine();
-                    break;
-                } catch (Exception e) {
+                soTrang = scanner.nextLine();
+                if (!soTrang.isEmpty()) {
+                    if (validatePage.page(soTrang)) {
+                        break;
+                    } else {
+                        System.out.println(">>>>[CHÚ Ý]: Số trang gồm các ký tự từ [0-9] [ví dụ: 22]");
+                    }
+                } else {
                     System.out.println("Không được để trống");
                 }
             }
@@ -113,20 +151,29 @@ public class ManagerThuVien {
             System.out.println("Số phát hành: ");
             String soPhatHanh;
             while (true) {
-                try {
-                    soPhatHanh = scanner.nextLine();
-                    break;
-                } catch (Exception e) {
+                soPhatHanh = scanner.nextLine();
+                if (!soPhatHanh.isEmpty()) {
+                    if (!validateNoiDung.noiDung(soPhatHanh)) {
+                        break;
+                    } else {
+                        System.out.println(">>>>[CHÚ Ý]: Số phát hành gồm các ký tự từ (a-z/A-Z/0-9) [ví dụ: 21]");
+                    }
+                } else {
                     System.out.println("Không được để trống");
                 }
             }
-            System.out.println("Tháng phát hành: ");
+            System.out.println("Tháng phát hành: (ví dụ: 09) ");
             String thangPhatHanh;
             while (true) {
-                try {
-                    thangPhatHanh = scanner.nextLine();
-                    break;
-                } catch (Exception e) {
+                thangPhatHanh = scanner.nextLine();
+                if (!thangPhatHanh.isEmpty()) {
+                    if (validateDayMonthPH.dayMonthPH(thangPhatHanh)) {
+                        break;
+                    } else {
+                        System.out.println("Sai định dạng tháng phát hành! nhập lại");
+                    }
+
+                } else {
                     System.out.println("Không được để trống");
                 }
             }
@@ -134,13 +181,17 @@ public class ManagerThuVien {
             return new TapChi(maTaiLieu, tenTacGia, tenTaiLieu, ngaySanXuat, soXuatBan, giaNhap, soPhatHanh, thangPhatHanh);
         }
         if (taiLieu.equals("Bao")) {
-            System.out.println("Ngày phát hành");
+            System.out.println("Ngày phát hành: (ví dụ: 09)");
             String ngayPhatHanh;
             while (true) {
-                try {
-                    ngayPhatHanh = scanner.nextLine();
-                    break;
-                } catch (Exception e) {
+                ngayPhatHanh = scanner.nextLine();
+                if (!ngayPhatHanh.isEmpty()) {
+                    if (validateDayMonthPH.dayMonthPH(ngayPhatHanh)) {
+                        break;
+                    } else {
+                        System.out.println("Sai định dạng ngày phát hành! nhập lại");
+                    }
+                } else {
                     System.out.println("Không được để trống");
                 }
             }
@@ -168,19 +219,88 @@ public class ManagerThuVien {
         if (check < 0) {
             System.out.println("Sai ten");
         } else {
-            System.out.println("Fix mã tài liệu ");
-            maTaiLieu = scanner.nextLine();
-            System.out.println("Fix tên tác giả");
-            String tenTacGia = scanner.nextLine();
-            System.out.println("Fix tên tài liệu");
-            String tenTaiLieu = scanner.nextLine();
-            System.out.println("Fix ngày sản xuất");
-            String ngaySanXuat = scanner.nextLine();
-            System.out.println("Fix số xuất bản");
-            String soXuatBan = scanner.nextLine();
-            System.out.println("Fix giá nhập");
-            float giaNhap = Float.parseFloat(scanner.nextLine());
+            System.out.println("Fix mã tài liệu:   [ví dụ: 10k1]");
+            while (true) {
+                maTaiLieu = scanner.nextLine();
+                if (!maTaiLieu.isEmpty()) {
+                    if (!validateNoiDung.noiDung(maTaiLieu)) {
+                        break;
+                    } else {
+                        System.out.println(">>>>[CHÚ Ý]: Mã tài liệu gồm các ký tự từ (a-z/A-Z/0-9) ");
+                    }
+                } else {
+                    System.out.println("Thông tin không được để trống");
+                }
+            }
+            System.out.println("Fix tên tác giả:   [ví dụ: nguyen van a]");
+            String tenTacGia;
+            while (true) {
+                tenTacGia = scanner.nextLine();
+                if (!tenTacGia.isEmpty()) {
+                    if (!validateNoiDung.noiDung(tenTacGia)) {
+                        break;
+                    } else {
+                        System.out.println(">>>>[CHÚ Ý]: Tên tác giả gồm các ký tự từ a-z/A-Z/0-9");
+                    }
+                } else {
+                    System.out.println("Thông tin không được để trống");
+                }
+            }
+            System.out.println("Fix tên tài liệu:  [ví dụ: toan]");
+            String tenTaiLieu;
+            while (true) {
+                tenTaiLieu = scanner.nextLine();
+                if (!tenTaiLieu.isEmpty()) {
+                    if (!validateNoiDung.noiDung(tenTaiLieu)) {
+                        break;
+                    } else {
+                        System.out.println(">>>>[CHÚ Ý]: Tên tài liệu gồm các ký tự từ a-z/A-Z/0-9");
+                    }
+                } else {
+                    System.out.println("Thông tin không được để trống");
+                }
+            }
 
+            System.out.println("Fix ngày sản xuất: (ví dụ: 09/07/2021)");
+            String ngaySanXuat;
+            while (true) {
+                ngaySanXuat = scanner.nextLine();
+                if (!ngaySanXuat.isEmpty()) {
+                    if (validateDay.validate(ngaySanXuat)) {
+                        break;
+                    } else {
+                        System.out.println("Sai định dạng ngày! nhập lại");
+                    }
+                } else {
+                    System.out.println("Thông tin không được để trống");
+                }
+            }
+
+            System.out.println("Fix số xuất bản:  [ví dụ: 15]");
+            String soXuatBan;
+            while (true) {
+                soXuatBan = scanner.nextLine();
+                if (!soXuatBan.isEmpty()) {
+                    if (!validateNoiDung.noiDung(soXuatBan)) {
+                        break;
+                    } else {
+                        System.out.println(">>>>[CHÚ Ý]: Số xuất bản gồm các ký tự từ a-z/A-Z/0-9");
+                    }
+                } else {
+                    System.out.println("Thông tin không được để trống");
+                }
+            }
+
+            System.out.println("Fix giá nhập");
+            float giaNhap;
+            while (true) {
+                try {
+                    giaNhap = Float.parseFloat(scanner.nextLine());
+                    break;
+                } catch (Exception e) {
+                    System.out.println("Thông tin không được để trống");
+                }
+            }
             list.get(check).setMaTaiLieu(maTaiLieu);
             list.get(check).setTenTaiLieu(tenTaiLieu);
             list.get(check).setTenTacGia(tenTacGia);
@@ -189,26 +309,90 @@ public class ManagerThuVien {
             list.get(check).setGiaNhap(giaNhap);
             if (list.get(check) instanceof Bao) {
                 System.out.println("Fix ngày phát hành");
-                String ngayPhatHanh = scanner.nextLine();
-                ((Bao) list.get(check)).setNgayPhatHanh(ngayPhatHanh);
-                System.out.println(">>>>>>>>>>>>> [ĐÃ SỬA] ");
+                String ngayPhatHanh;
+                while (true) {
+                    ngayPhatHanh = scanner.nextLine();
+                    if (!ngayPhatHanh.isEmpty()) {
+                        if (validateDayMonthPH.dayMonthPH(ngayPhatHanh)) {
+                            ((Bao) list.get(check)).setNgayPhatHanh(ngayPhatHanh);
+                            System.out.println(">>>>>>>>>>>>> [ĐÃ SỬA] ");
+                            break;
+                        } else {
+                            System.out.println("Sai định dạng ngày phát hành! nhập lại");
+                        }
+                    } else {
+                        System.out.println("Thông tin không được để trống");
+                    }
+                }
+
             }
             if (list.get(check) instanceof SachTaiLieu) {
                 System.out.println("Fix tên sách");
-                String tenSach = scanner.nextLine();
+                String tenSach;
+                while (true) {
+                    tenSach = scanner.nextLine();
+                    if (!tenSach.isEmpty()) {
+                        if (validateNoiDung.noiDung(tenSach)) {
+                            ((SachTaiLieu) list.get(check)).setTenSach(tenSach);
+                            break;
+                        } else {
+                            System.out.println(">>>>[CHÚ Ý]: Tên sách gồm các ký tự từ a-z/A-Z/0-9");
+                        }
+                    } else {
+                        System.out.println("Thông tin không được để trống");
+                    }
+                }
                 System.out.println("Fix số trang");
-                String soTrang = scanner.nextLine();
-                ((SachTaiLieu) list.get(check)).setTenSach(tenSach);
-                ((SachTaiLieu) list.get(check)).setSoTrang(soTrang);
+                String soTrang;
+                while (true) {
+                    soTrang = scanner.nextLine();
+                    if (!soTrang.isEmpty()) {
+                        if (validatePage.page(soTrang)) {
+                            ((SachTaiLieu) list.get(check)).setTenSach(soTrang);
+                            break;
+                        } else {
+                            System.out.println(">>>>[CHÚ Ý]: Số trang gồm các ký tự từ [0-9]");
+                        }
+                    } else {
+                        System.out.println("Thông tin không được để trống");
+                    }
+                }
                 System.out.println(">>>>>>>>>>>>> [ĐÃ SỬA] ");
             }
             if (list.get(check) instanceof TapChi) {
-                System.out.println("Fix số phát hành");
-                String soPhatHanh = scanner.nextLine();
-                System.out.println("Fix tháng phát hành");
-                String thangPhatHanh = scanner.nextLine();
-                ((TapChi) list.get(check)).setSoPhatHanh(soPhatHanh);
-                ((TapChi) list.get(check)).setThangPhatHanh(thangPhatHanh);
+                System.out.println("Fix số phát hành:  [ví dụ: 10]");
+                String soPhatHanh;
+                while (true) {
+                    soPhatHanh = scanner.nextLine();
+                    if (!soPhatHanh.isEmpty()) {
+                        if (validateNoiDung.noiDung(soPhatHanh)) {
+                            ((TapChi) list.get(check)).setSoPhatHanh(soPhatHanh);
+                            break;
+                        } else {
+                            System.out.println(">>>>[CHÚ Ý]: Số phát hành gồm các ký tự từ a-z/A-Z/0-9");
+                        }
+                    } else {
+                        System.out.println("Thông tin không được để trống");
+                    }
+                }
+
+
+                System.out.println("Fix tháng phát hành: (ví dụ: 09) ");
+                String thangPhatHanh;
+                while (true) {
+                    thangPhatHanh = scanner.nextLine();
+                    if (!thangPhatHanh.isEmpty()) {
+                        if (validateDayMonthPH.dayMonthPH(thangPhatHanh)) {
+                            ((TapChi) list.get(check)).setSoPhatHanh(thangPhatHanh);
+                            break;
+                        } else {
+                            System.out.println(">>>>[CHÚ Ý]: Tháng phát hành gồm 2 ký tự từ [0-9]");
+                        }
+
+                    } else {
+                        System.out.println("Thông tin không được để trống");
+                    }
+                }
                 System.out.println(">>>>>>>>>>>>> [ĐÃ SỬA] ");
             }
         }
@@ -219,7 +403,6 @@ public class ManagerThuVien {
             System.out.println("Danh sách trống");
         }
         for (ThuVien tv : list) {
-            System.out.println("DANH SÁCH THƯ VIỆN:");
             System.out.println(tv);
         }
     }
@@ -233,8 +416,6 @@ public class ManagerThuVien {
         for (ThuVien tv : list) {
             if (tv.getTenTaiLieu().equals(tenTL)) {
                 System.out.println(tv);
-            } else {
-                System.out.println("Tài liệu không tồn tại");
             }
         }
     }
@@ -265,6 +446,10 @@ public class ManagerThuVien {
         }
         list.sort(sortTaiLieu);
         System.out.println(">>>>>>>>>>>>> [ĐÃ XẮP XẾP] ");
+    }
+
+    public void searchNameTL() {
+
     }
 
 
@@ -317,32 +502,32 @@ public class ManagerThuVien {
 
     }
 
-    public void readFile() throws IOException {
-        BufferedReader bufferedReader = null;
-        try {
-            FileReader fileReader = new FileReader("thuVien.csv");
-            bufferedReader = new BufferedReader(fileReader);
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                String[] str = line.split(", ");
-                for (ThuVien tv : ManagerThuVien.list) {
-                    if (tv instanceof Bao) {
-                        ManagerThuVien.list.add(new Bao(str[0], str[1], str[2], str[3], str[4], Float.parseFloat(str[5]), str[6]));
-                    } else if (tv instanceof SachTaiLieu) {
-                        ManagerThuVien.list.add(new SachTaiLieu(str[0], str[1], str[2], str[3], str[4], Float.parseFloat(str[5]), str[6], str[7]));
-                    } else {
-                        ManagerThuVien.list.add(new TapChi(str[0], str[1], str[2], str[3], str[4], Float.parseFloat(str[5]), str[6], str[7]));
-                    }
-                }
-            }
+    //    public void readFile() throws IOException {
+//        BufferedReader bufferedReader = null;
+//        try {
+//            FileReader fileReader = new FileReader("thuVien.csv");
+//            bufferedReader = new BufferedReader(fileReader);
+//            String line = " ";
+//            while ((line = bufferedReader.readLine()) != null) {
+//                String[] str = line.split(", ");
+//                for(ThuVien thuVien:list){
+//                    if(thuVien instanceof Bao){
+//                        ManagerThuVien.list.add(new ThuVien(getMaTaiLieu));
+//                    }
+//                }
+////                if(str.length>8){
+////                    ManagerThuVien.list.add(new ThuVien(str[0], str[1], str[2], str[3], str[4], Float.parseFloat(str[5]), str[6], str[7],str[8],str[10],str[11]));
+////                }
+//            }
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } finally {
+//            bufferedReader.close();
+//        }
+//
+//    }
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            bufferedReader.close();
-        }
-
-    }
 
 }
 
