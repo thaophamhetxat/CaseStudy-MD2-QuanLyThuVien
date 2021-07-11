@@ -1,6 +1,8 @@
 package com.codegym;
 
-public class ThuVien {
+import java.io.Serializable;
+
+public class ThuVien implements Serializable {
     public String maTaiLieu;
     String tenTacGia;
     String tenTaiLieu;

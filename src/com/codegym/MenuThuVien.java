@@ -2,7 +2,6 @@ package com.codegym;
 
 import com.codegym.gopY.ManagerGopY;
 import com.codegym.validate.ValidatePassWordPerson;
-
 import java.io.*;
 import java.util.*;
 
@@ -12,16 +11,16 @@ public class MenuThuVien {
     static Scanner scanner = new Scanner(System.in);
     Calendar cal = Calendar.getInstance();
     ValidatePassWordPerson validatePassWordPerson = new ValidatePassWordPerson();
-    List<ThuVien> list = new ArrayList<>();
-    List<ThuVien> listDataFromFile = readDataFromList("thuVien.csv");
 
     static String nameFile1;
     static String passWord1;
 
+    public MenuThuVien() throws IOException, ClassNotFoundException {
+    }
+
     public void menu() throws IOException, ClassNotFoundException {
         Date date = cal.getTime();
         while (true) {
-
             System.out.println("╔=======================================================╗");
             System.out.println("║          ▂ ▃ ▅ ▆ █ QUẢN LÝ THƯ VIỆN █ ▆ ▅ ▃ ▂         ║");
             System.out.println("╠=======================================================╣");
@@ -100,13 +99,13 @@ public class MenuThuVien {
                     final int selected2 = Integer.parseInt(scanner.nextLine());
                     switch (selected2) {
                         case 1: {
-                            writeToFile("thuVien.csv", list);
+                            ManagerThuVien.writeToFile();
                             System.out.println(">>>>>>>>>>>>>>[ĐÃ LƯU]");
                             break;
                         }
                         case 2: {
-
-                            for (ThuVien thuVien : listDataFromFile) {
+                           ManagerThuVien.readDataFromList();
+                            for (ThuVien thuVien : ManagerThuVien.list) {
                                 System.out.println(thuVien);
                             }
                             break;
@@ -119,9 +118,9 @@ public class MenuThuVien {
                         }
                         case 4: {
                             System.out.println("*==============================*");
-                            System.out.println("|  UserName: " + nameFile1+   "|");
-                            System.out.println("|  PassWord: " + passWord1+   "|");
-                            System.out.println("|  Thời gian truy cập: "+date+"|");
+                            System.out.println("|  UserName: " + nameFile1 + "|");
+                            System.out.println("|  PassWord: " + passWord1 + "|");
+                            System.out.println("|  Thời gian truy cập: " + date + "|");
                             System.out.println("*==============================*");
                             break;
                         }
@@ -179,13 +178,15 @@ public class MenuThuVien {
                             System.out.println(">>>[1,2,3 .. để sử dụng                                                     ]<<<");
                             System.out.println(">>>[ví dụ: muốn xem danh sách thông tin:   chọn [1]->OK->danh sách hiển thị ]<<<");
                             System.out.println(">>>[------------------------------------------------------------------------]<<<");
-                        }break;
+                        }
+                        break;
                         case 3:
-                            menu();break;
+                            menu();
+                            break;
                     }
                 }
                 break;
-                case 8:{
+                case 8: {
                     System.out.println("*====================================*");
                     System.out.println("|          HỖ TRỢ KHÁCH HÀNG         |");
                     System.out.println("*====================================*");
@@ -196,16 +197,21 @@ public class MenuThuVien {
                     System.out.println("* ===================================*");
                     System.out.print("     >>>Chọn: ");
                     final int selected5 = Integer.parseInt(scanner.nextLine());
-                    switch (selected5){
-                        case 1:{
+                    switch (selected5) {
+                        case 1: {
                             managerGopY.themMail("mail");
                             managerGopY.writeMail();
                             System.out.println(">>>>>>>>>[ĐÃ GỬI]<<<<<<<<<<");
                             System.out.println(">>>>>>>>>[Chúng tôi sẽ gửi lại phản hồi cho bạn sau]<<<<<<<<<<");
                             break;
-                        } case 2: managerGopY.show();break;
-                        case 4:menu();break;
-                        case 3:{
+                        }
+                        case 2:
+                            managerGopY.show();
+                            break;
+                        case 4:
+                            menu();
+                            break;
+                        case 3: {
                             System.out.println("*==========================================*");
                             System.out.println("|   Bạn đánh giá sản phẩm này như thế nào  |");
                             System.out.println("*==========================================*");
@@ -217,21 +223,27 @@ public class MenuThuVien {
                             System.out.println("* =========================================*");
                             System.out.print("     >>>Chọn: ");
                             final int selected6 = Integer.parseInt(scanner.nextLine());
-                            switch (selected6){
+                            switch (selected6) {
                                 case 1:
-                                    System.out.println(" (U_U)  cảm ơn bạn, tôi xin lỗi về vấn đề bạn gặp phải...");break;
+                                    System.out.println(" (U_U)  cảm ơn bạn, tôi xin lỗi về vấn đề bạn gặp phải...");
+                                    break;
                                 case 2:
-                                    System.out.println(" (O_O)  Cảm ơn bạn đã đánh giá");break;
+                                    System.out.println(" (O_O)  Cảm ơn bạn đã đánh giá");
+                                    break;
                                 case 3:
-                                    System.out.println(" (n_n)  Cảm ơn bạn, chúc bạn sử dụng vui vẻ");break;
+                                    System.out.println(" (n_n)  Cảm ơn bạn, chúc bạn sử dụng vui vẻ");
+                                    break;
                                 case 4:
-                                    System.out.println(" (^_^)  cảm ơn bạn!");break;
+                                    System.out.println(" (^_^)  cảm ơn bạn!");
+                                    break;
                                 case 5:
-                                    System.out.println(" w(^o^)w  THANKS YOU!");break;
+                                    System.out.println(" w(^o^)w  THANKS YOU!");
+                                    break;
                             }
                         }
                     }
-                }break;
+                }
+                break;
                 default: {
                     menu();
                 }
@@ -239,10 +251,7 @@ public class MenuThuVien {
             }
 
         }
-
     }
-
-
 
     public void start() throws IOException, ClassNotFoundException {
         File file = new File("user.csv");
@@ -260,9 +269,9 @@ public class MenuThuVien {
         System.out.println("* ===================================*");
         System.out.print("     >>>Chọn: ");
         int choose = Integer.parseInt(scanner.nextLine());
-        while (true){
-            switch (choose){
-                case 1:{
+        while (true) {
+            switch (choose) {
+                case 1: {
                     int check1 = -1;
                     while (true) {
                         System.out.println(">>>Username: ");
@@ -272,18 +281,20 @@ public class MenuThuVien {
                                 while (true) {
                                     System.out.println(">>>Password: ");
                                     String password = scanner.nextLine();
-                                    if(password.isEmpty()){
+                                    if (password.isEmpty()) {
                                         System.out.println("Mật khẩu không được để trống! Mời nhập lại");
-                                    }else if (ManagerUserPerson.listUser.get(i).getPassword().equals(password)) {
+                                    } else if (ManagerUserPerson.listUser.get(i).getPassword().equals(password)) {
                                         nameFile1 = userName;
                                         System.out.println(">>>>>>>>>>>[Loading....1....17%....29%...50%...87%...100%]");
                                         System.out.println("[************ WELCOME TO " + userName.toUpperCase() + " *************]");
                                         check1 = 1;
                                         passWord1 = password;
                                         break;
-                                    }else {
-                                        System.out.println("[***sai pass***]");}
-                                }break;
+                                    } else {
+                                        System.out.println("[***sai pass***]");
+                                    }
+                                }
+                                break;
                             }
                         }
                         if (check1 > 0) {
@@ -291,8 +302,9 @@ public class MenuThuVien {
                         }
                         System.out.println("[***sai user***]");
                     }
-                }break;
-                case 2:{
+                }
+                break;
+                case 2: {
                     while (true) {
                         System.out.println(">>>Username: ");
                         String userName = scanner.nextLine();
@@ -305,15 +317,15 @@ public class MenuThuVien {
                         if (check > 0) {
                             System.out.println(">>>>>>[ Tên đăng nhập đã tồn tại! ]<<<<<<");
                         } else {
-                            while (true){
+                            while (true) {
                                 System.out.println(">>>Password: ");
                                 String password = scanner.nextLine();
-                                if(password.isEmpty()){
+                                if (password.isEmpty()) {
                                     System.out.println("Pass không được để trống");
-                                } else if(!validatePassWordPerson.PassWordPerson(password)){
+                                } else if (!validatePassWordPerson.PassWordPerson(password)) {
                                     System.out.println("PassWord không hợp lệ");
                                     System.out.println(">>>[CHÚ Ý]: PassWord phải từ 6-12 ký tự và phải chứa các ký tự (a,A,@,1,..)");
-                                }else {
+                                } else {
                                     UserPerson userPerson = new UserPerson(userName, password);
                                     ManagerUserPerson.listUser.add(userPerson);
                                     ManagerUserPerson.writeFileUser();
@@ -326,43 +338,19 @@ public class MenuThuVien {
                                 }
                             }
 
-                        }break;
+                        }
+                        break;
                     }
-                }break;
-                default:{
+                }
+                break;
+                default: {
                     System.out.println("CHỌN SAI MỜI CHỌN LẠI");
                     start();
                 }
-            }break;
+            }
+            break;
         }
     }
 
-
-    private static List<ThuVien> readDataFromList(String path) {
-        List<ThuVien> list = new ArrayList<>();
-        try {
-            FileInputStream fis = new FileInputStream(path);
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            list = (List<ThuVien>) ois.readObject();
-            fis.close();
-            ois.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return list;
-
-    }
-
-    public static void writeToFile(String path, List<ThuVien> list) {
-        try {
-            FileOutputStream fos = new FileOutputStream(path);
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(list);
-            oos.close();
-            fos.close();
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
-    }
 
 }

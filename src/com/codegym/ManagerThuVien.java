@@ -1,6 +1,5 @@
 package com.codegym;
 
-
 import com.codegym.validate.ValidateDay;
 import com.codegym.validate.ValidateDayMonthPH;
 import com.codegym.validate.ValidatePage;
@@ -8,16 +7,15 @@ import com.codegym.validate.ValidateNoiDung;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
 import java.util.Scanner;
-
 
 public class ManagerThuVien {
 
     public static ArrayList<ThuVien> list = new ArrayList<>();
     static Scanner scanner = new Scanner(System.in);
     static SortTaiLieu sortTaiLieu = new SortTaiLieu();
-    private String nameFile;
+    static String nameFile;
     private static ValidateDay validateDay = new ValidateDay();
     private static ValidateDayMonthPH validateDayMonthPH = new ValidateDayMonthPH();
     private static ValidateNoiDung validateNoiDung = new ValidateNoiDung();
@@ -25,16 +23,27 @@ public class ManagerThuVien {
 
     public ManagerThuVien(String nameFile) {
         this.nameFile = nameFile;
-
+    }
+///
+    static void readDataFromList() throws IOException, ClassNotFoundException {
+        FileInputStream fileInputStream = new FileInputStream("thuvien123.txt");
+        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+        list = (ArrayList<ThuVien>) objectInputStream.readObject();
     }
 
-
-    public void themTaiLieu(String taiLieu) {
+    public static void writeToFile() throws IOException {
+        FileOutputStream fileOutputStream = new FileOutputStream("thuvien123.txt");
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+        objectOutputStream.writeObject(list);
+    }
+///
+    public static void themTaiLieu(String taiLieu) throws IOException {
         ThuVien thuVien = createTaiLieu(taiLieu);
         list.add(thuVien);
+        writeToFile();
     }
 
-    private ThuVien createTaiLieu(String taiLieu) {
+    static ThuVien createTaiLieu(String taiLieu) {
         System.out.println("Mã tài liệu: ");
         String maTaiLieu;
         while (true) {
@@ -203,7 +212,8 @@ public class ManagerThuVien {
         return null;
     }
 
-    public void editTaiLieu() {
+    static void editTaiLieu() throws IOException, ClassNotFoundException {
+        readDataFromList();
         System.out.println("Nhập mã cần sửa");
         String timTL = scanner.nextLine();
         if (timTL.isEmpty()) {
@@ -396,9 +406,11 @@ public class ManagerThuVien {
                 System.out.println(">>>>>>>>>>>>> [ĐÃ SỬA] ");
             }
         }
+        writeToFile();
     }
 
-    public void displayTaiLieu() {
+    static void displayTaiLieu() throws IOException, ClassNotFoundException {
+        readDataFromList();
         if (list.isEmpty()) {
             System.out.println("Danh sách trống");
         }
@@ -407,7 +419,8 @@ public class ManagerThuVien {
         }
     }
 
-    public void searchTaiLieu() {
+    static void searchTaiLieu() throws IOException, ClassNotFoundException {
+        readDataFromList();
         System.out.println("Nhập tên tài liệu cần tìm: ");
         String tenTL = scanner.nextLine();
         if (tenTL.isEmpty()) {
@@ -420,7 +433,8 @@ public class ManagerThuVien {
         }
     }
 
-    public void deleteTaiLieu() {
+    static void deleteTaiLieu() throws IOException, ClassNotFoundException {
+        readDataFromList();
         System.out.println("Nhập tên tài liệu cần xóa: ");
         String tenTL = scanner.nextLine();
         if (tenTL.isEmpty()) {
@@ -438,97 +452,23 @@ public class ManagerThuVien {
                 System.out.println("*****************> ĐÃ XÓA <****************");
             }
         }
+        writeToFile();
     }
 
-    public void sortMaTaiLieu() {
+    static void sortMaTaiLieu() throws IOException, ClassNotFoundException {
+        readDataFromList();
         if (list.isEmpty()) {
             System.out.println("Danh sách trống");
+        }else {
+            Collections.sort(list,sortTaiLieu);
+            System.out.println(">>>>>>>>>>>>> [ĐÃ XẮP XẾP] ");
         }
-        list.sort(sortTaiLieu);
-        System.out.println(">>>>>>>>>>>>> [ĐÃ XẮP XẾP] ");
-    }
-
-    public void searchNameTL() {
 
     }
-
-
-    public void writeFile() throws IOException {
-        File fileExcel = new File("thuVien.csv");
-        FileWriter fileWriter = new FileWriter(fileExcel);
-        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-        String tieuDe = "Thuvien" + "," + "maTaiLieu" + "," + "tenTacGia" + "," + "tenTaiLieu" + "," + "ngaySanXuat" + "," + "soXuatBan" + "," +
-                "giaNhap" + "," + "ngayPhatHanh" + "," + "tenSach" + "," + "soTrang" + "," + "soPhatHanh" + "," + "thangPhatHanh";
-        bufferedWriter.write(tieuDe);
-        for (ThuVien tv : ManagerThuVien.list) {
-            if (tv instanceof Bao) {
-                bufferedWriter.newLine();
-                bufferedWriter.write("Bao" + ","
-                        + tv.getMaTaiLieu() + ","
-                        + tv.getTenTacGia() + ","
-                        + tv.getTenTaiLieu() + ","
-                        + tv.getNgaySanXuat() + ","
-                        + tv.getSoXuatBan() + ","
-                        + tv.getGiaNhap() + ","
-                        + ((Bao) tv).getNgayPhatHanh());
-
-            } else if (tv instanceof SachTaiLieu) {
-                bufferedWriter.newLine();
-                bufferedWriter.write("SachTaiLieu" + ", "
-                        + tv.getMaTaiLieu() + ","
-                        + tv.getTenTacGia() + ","
-                        + tv.getTenTaiLieu() + ","
-                        + tv.getNgaySanXuat() + ","
-                        + tv.getSoXuatBan() + ","
-                        + tv.getGiaNhap() + "," + ","
-                        + ((SachTaiLieu) tv).getTenSach() + ","
-                        + ((SachTaiLieu) tv).getSoTrang());
-
-            } else {
-                bufferedWriter.newLine();
-                bufferedWriter.write("TapChi" + ", "
-                        + tv.getMaTaiLieu() + ","
-                        + tv.getTenTacGia() + ","
-                        + tv.getTenTaiLieu() + ","
-                        + tv.getNgaySanXuat() + ","
-                        + tv.getSoXuatBan() + ","
-                        + tv.getGiaNhap() + "," + "," + "," + ","
-                        + ((TapChi) tv).getThangPhatHanh() + ","
-                        + ((TapChi) tv).getSoPhatHanh());
-            }
-        }
-        bufferedWriter.close();
-        System.out.println(">>>>>>>>>>>>> ĐÃ GHI <<<<<<<<<<<<");
-
-    }
-
-    //    public void readFile() throws IOException {
-//        BufferedReader bufferedReader = null;
-//        try {
-//            FileReader fileReader = new FileReader("thuVien.csv");
-//            bufferedReader = new BufferedReader(fileReader);
-//            String line = " ";
-//            while ((line = bufferedReader.readLine()) != null) {
-//                String[] str = line.split(", ");
-//                for(ThuVien thuVien:list){
-//                    if(thuVien instanceof Bao){
-//                        ManagerThuVien.list.add(new ThuVien(getMaTaiLieu));
-//                    }
-//                }
-////                if(str.length>8){
-////                    ManagerThuVien.list.add(new ThuVien(str[0], str[1], str[2], str[3], str[4], Float.parseFloat(str[5]), str[6], str[7],str[8],str[10],str[11]));
-////                }
-//            }
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        } finally {
-//            bufferedReader.close();
-//        }
-//
-//    }
-
 
 }
+
+
+
 
 
