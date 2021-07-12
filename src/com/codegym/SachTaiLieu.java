@@ -11,11 +11,13 @@ public class SachTaiLieu extends ThuVien {
         this.soTrang = soTrang;
     }
 
-    public SachTaiLieu(String maTaiLieu, String tenTacGia, String tenTaiLieu, String ngaySanXuat, String soXuatBan, float giaNhap, String tenSach, String soTrang) {
+
+    public SachTaiLieu(int maTaiLieu, String tenTacGia, String tenTaiLieu, String ngaySanXuat, String soXuatBan, float giaNhap, String tenSach, String soTrang) {
         super(maTaiLieu, tenTacGia, tenTaiLieu, ngaySanXuat, soXuatBan, giaNhap);
         this.tenSach = tenSach;
         this.soTrang = soTrang;
     }
+
 
     public String getTenSach() {
         return tenSach;

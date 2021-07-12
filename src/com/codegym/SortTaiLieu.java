@@ -6,6 +6,10 @@ import java.util.Comparator;
 public class SortTaiLieu implements Comparator<ThuVien> {
     @Override
     public int compare(ThuVien o1, ThuVien o2) {
-        return o1.getMaTaiLieu().compareTo(o2.maTaiLieu);
+        if(o1.getMaTaiLieu()>o2.getMaTaiLieu()){
+            return 1;
+        }else if( o1.getMaTaiLieu()==o2.getMaTaiLieu()){
+            return 0;
+        }else return -1;
     }
 }

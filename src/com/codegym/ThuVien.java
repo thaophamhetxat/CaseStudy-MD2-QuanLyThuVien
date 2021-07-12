@@ -3,7 +3,7 @@ package com.codegym;
 import java.io.Serializable;
 
 public class ThuVien implements Serializable {
-    public String maTaiLieu;
+     int maTaiLieu;
     String tenTacGia;
     String tenTaiLieu;
     String ngaySanXuat;
@@ -13,7 +13,7 @@ public class ThuVien implements Serializable {
     public ThuVien() {
     }
 
-    public ThuVien(String maTaiLieu, String tenTacGia, String tenTaiLieu, String ngaySanXuat, String soXuatBan, float giaNhap) {
+    public ThuVien(int maTaiLieu, String tenTacGia, String tenTaiLieu, String ngaySanXuat, String soXuatBan, float giaNhap) {
         this.maTaiLieu = maTaiLieu;
         this.tenTacGia = tenTacGia;
         this.tenTaiLieu = tenTaiLieu;
@@ -22,11 +22,11 @@ public class ThuVien implements Serializable {
         this.giaNhap = giaNhap;
     }
 
-    public String getMaTaiLieu() {
+    public int getMaTaiLieu() {
         return maTaiLieu;
     }
 
-    public void setMaTaiLieu(String maTaiLieu) {
+    public void setMaTaiLieu(int maTaiLieu) {
         this.maTaiLieu = maTaiLieu;
     }
 
@@ -74,11 +74,11 @@ public class ThuVien implements Serializable {
     @Override
     public String toString() {
         return "ThuVien{" +
-                "maTaiLieu='" + maTaiLieu + '\'' +
-                ", tenTacGia='" + tenTacGia + '\'' +
-                ", tenTaiLieu='" + tenTaiLieu + '\'' +
-                ", ngaySanXuat='" + ngaySanXuat + '\'' +
-                ", soXuatBan='" + soXuatBan + '\'' +
+                "maTaiLieu=" + maTaiLieu + '\'' +
+                ", tenTacGia=" + tenTacGia + '\'' +
+                ", tenTaiLieu=" + tenTaiLieu + '\'' +
+                ", ngaySanXuat=" + ngaySanXuat + '\'' +
+                ", soXuatBan=" + soXuatBan + '\'' +
                 ", giaNhap=" + giaNhap + '}';
     }
 

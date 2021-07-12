@@ -11,7 +11,7 @@ public class TapChi extends ThuVien {
         this.thangPhatHanh = thangPhatHanh;
     }
 
-    public TapChi(String maTaiLieu, String tenTacGia, String tenTaiLieu, String ngaySanXuat, String soXuatBan, float giaNhap, String soPhatHanh, String thangPhatHanh) {
+    public TapChi(int maTaiLieu, String tenTacGia, String tenTaiLieu, String ngaySanXuat, String soXuatBan, float giaNhap, String soPhatHanh, String thangPhatHanh) {
         super(maTaiLieu, tenTacGia, tenTaiLieu, ngaySanXuat, soXuatBan, giaNhap);
         this.soPhatHanh = soPhatHanh;
         this.thangPhatHanh = thangPhatHanh;

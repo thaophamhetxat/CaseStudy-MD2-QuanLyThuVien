@@ -9,7 +9,7 @@ public class Bao extends ThuVien {
         this.ngayPhatHanh = ngayPhatHanh;
     }
 
-    public Bao(String maTaiLieu, String tenTacGia, String tenTaiLieu, String ngaySanXuat, String soXuatBan, float giaNhap, String ngayPhatHanh) {
+    public Bao(int maTaiLieu, String tenTacGia, String tenTaiLieu, String ngaySanXuat, String soXuatBan, float giaNhap, String ngayPhatHanh) {
         super(maTaiLieu, tenTacGia, tenTaiLieu, ngaySanXuat, soXuatBan, giaNhap);
         this.ngayPhatHanh = ngayPhatHanh;
     }
